@@ -14,6 +14,8 @@ from sklearn.model_selection import cross_val_score
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 import streamlit as st
 from sklearn.base import BaseEstimator, TransformerMixin, ClassifierMixin
+import nlp
+
 
 class TextPreprocessor(BaseEstimator, TransformerMixin):
     def __init__(self, tokenizer=word_tokenize):
@@ -25,10 +27,12 @@ class TextPreprocessor(BaseEstimator, TransformerMixin):
     def transform(self, X):
         X_transformed = []
         for text in X:
-            text = text.lower()  # Convert to lowercase
+            text = text.lower()
             text = re.sub('[^a-zA-Z]', ' ', text)  # Keep only lowercase and uppercase letters
             text = re.sub('\s+', ' ', text)  # Replace multiple whitespace characters with a single space
-            text = self.tokenizer(text)  # Tokenize the text
+            text = nlp(text)
+            text = [word.lemma_ for word in text if not word.is_stop and not word.is_punct and not word.like_num]
+            text = ' '.join(text)
             X_transformed.append(text)
         return X_transformed
 
@@ -57,3 +61,4 @@ class SentimentClassifier(BaseEstimator, ClassifierMixin):
 
     def score(self, X, y):
         return self.classifier.score(X, y)
+    
