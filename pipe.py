@@ -13,6 +13,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.svm import SVC
 from sklearn.naive_bayes import MultinomialNB
+import pandas as pd
 
 
 # lets crteate a class to preprocess the review
@@ -25,9 +26,12 @@ class TextPreprocessor(BaseEstimator, TransformerMixin):
         
     def fit(self, X, y=None):
         return self
-    
+
     def transform(self, X, y=None):
-        X = X.apply(self._clean_text)
+        if isinstance(X, pd.Series):
+            X = X.apply(self._clean_text)
+        elif isinstance(X, list):
+            X = [self._clean_text(text) for text in X]
         return X
     
     def _clean_text(self, text):
@@ -63,3 +67,27 @@ class TextTokenizer(BaseEstimator, TransformerMixin):
     
     def transform(self, X, y=None):
         return self.tokenizer.transform(X)
+
+Pipeline([('preprocessor', TextPreprocessor()), ('tokenizer', TextTokenizer()), ('model', LogisticRegression())])
+# Create a pipeline for the logistic regression model
+logistic_pipeline = Pipeline([
+    ('preprocessor', TextPreprocessor()),
+    ('tokenizer', TextTokenizer()),
+    ('model', LogisticRegression())
+])
+# load the data
+data = pd.read_csv('balanced_restaurant_reviews.csv')
+
+X = data['Review']
+y = data['Sentiment']
+
+# split the data into training and testing data
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# predict the data using logistic regression
+logistic_pipeline.fit(X_train, y_train)
+# lets predict on a new review
+review = 'The product is really good. I loved it'
+prediction = logistic_pipeline.predict([review])
+print(f'The review is: {prediction[0]}')
+
