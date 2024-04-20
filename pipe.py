@@ -75,19 +75,4 @@ logistic_pipeline = Pipeline([
     ('tokenizer', TextTokenizer()),
     ('model', LogisticRegression())
 ])
-# load the data
-data = pd.read_csv('balanced_restaurant_reviews.csv')
-
-X = data['Review']
-y = data['Sentiment']
-
-# split the data into training and testing data
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-
-# predict the data using logistic regression
-logistic_pipeline.fit(X_train, y_train)
-# lets predict on a new review
-review = 'The product is really good. I loved it'
-prediction = logistic_pipeline.predict([review])
-print(f'The review is: {prediction[0]}')
 
