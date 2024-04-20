@@ -7,7 +7,7 @@ from sklearn.linear_model import LogisticRegression
 # from sklearn.ensemble import RandomForestClassifier
 # from sklearn.naive_bayes import MultinomialNB
 # from sklearn.svm import SVC
-from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.feature_extraction.X import TfidfVectorizer
 from nltk.tokenize import word_tokenize
 # from sklearn.model_selection import GridSearchCV
 from sklearn.model_selection import cross_val_score
@@ -25,16 +25,13 @@ class TextPreprocessor(BaseEstimator, TransformerMixin):
         return self
 
     def transform(self, X):
-        X_transformed = []
-        for text in X:
-            text = text.lower()
-            text = re.sub('[^a-zA-Z]', ' ', text)  # Keep only lowercase and uppercase letters
-            text = re.sub('\s+', ' ', text)  # Replace multiple whitespace characters with a single space
-            text = nlp(text)
-            text = [word.lemma_ for word in text if not word.is_stop and not word.is_punct and not word.like_num]
-            text = ' '.join(text)
-            X_transformed.append(text)
-        return X_transformed
+        X = X.lower()
+        X = re.sub('[^a-zA-Z]', ' ', X)  # Keep only lowercase and uppercase letters
+        X = re.sub('\s+', ' ', X)  # Replace multiple whitespace characters with a single space
+        X = nlp(X)
+        X = [word.lemma_ for word in X if not word.is_stop and not word.is_punct and not word.like_num]
+        X = ' '.join(X)
+        return X
 
 class TextVectorizer(BaseEstimator, TransformerMixin):
     def __init__(self, vectorizer=TfidfVectorizer):

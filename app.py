@@ -11,7 +11,6 @@ def main():
     text = st.text_input("Enter text:")
     if text:
         pipeline = load_pipeline("Nlp_pipeline.pkl")
-        pipeline.fit(text)
         prediction = pipeline.predict(text)
         st.write("Prediction:", prediction)
 
