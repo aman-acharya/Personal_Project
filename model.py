@@ -12,7 +12,7 @@ from nltk.tokenize import word_tokenize
 from sklearn.model_selection import GridSearchCV
 from sklearn.model_selection import cross_val_score
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
-
+import streamlit as st
 # load the data
 data = pd.read_csv('restaurant_reviews.csv')
 data.head()
