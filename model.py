@@ -66,11 +66,4 @@ scores = cross_val_score(model, X_train, y_train, cv=5)
 print('Cross-validation scores: {}'.format(scores))
 print('Average cross-validation score: {:.2f}'.format(scores.mean()))
 
-if __name__ == '__main__':
 
-    st.title("Sentiment Analysis App")
-    # rest of Streamlit code
-    st.write("Model Performance")
-    st.write(f"Naive Bayes Cross Validation Score: {scores.mean()}") 
-    st.write("Explore the Data")
-    st.write(data.head())
