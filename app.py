@@ -11,8 +11,9 @@ def main():
     text = st.text_input("Enter text:")
     if text:
         pipeline = load_pipeline("Nlp_pipeline.pkl")
-        result = pipeline.predict([text])
-        st.write(f"Sentiment: {result[0]}")
+        pipeline.fit(text)
+        prediction = pipeline.predict(text)
+        st.write("Prediction:", prediction)
 
 if __name__ == "__main__":
     main()
