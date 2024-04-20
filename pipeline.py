@@ -57,16 +57,3 @@ class SentimentClassifier(BaseEstimator, ClassifierMixin):
 
     def score(self, X, y):
         return self.classifier.score(X, y)
-    
-class SentimentPipeline:
-    def __init__(self, classifier=SentimentClassifier()):
-        self.classifier = classifier
-
-    def fit(self, X, y):
-        self.classifier.fit(X, y)
-
-    def predict(self, X):
-        return self.classifier.predict(X)
-
-    def score(self, X, y):
-        return self.classifier.score(X, y)
