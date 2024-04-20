@@ -7,7 +7,7 @@ from sklearn.linear_model import LogisticRegression
 # from sklearn.ensemble import RandomForestClassifier
 # from sklearn.naive_bayes import MultinomialNB
 # from sklearn.svm import SVC
-from sklearn.feature_extraction.X import TfidfVectorizer
+from sklearn.feature_extraction.text import TfidfVectorizer
 from nltk.tokenize import word_tokenize
 # from sklearn.model_selection import GridSearchCV
 from sklearn.model_selection import cross_val_score
