@@ -1,7 +1,9 @@
 pandas
 numpy
-streamlit
-scikit-learn
 nltk
 nlp
+spacy
+joblib
+streamlit
+scikit-learn
 spacy
