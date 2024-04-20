@@ -10,10 +10,9 @@ def main():
     st.title("Sentiment Analysis")
     text = st.text_input("Enter text:")
     if text:
-        pipeline = load_pipeline("pipeline.joblib")
+        pipeline = load_pipeline("Nlp_pipeline.pkl")
         result = pipeline.predict([text])
         st.write(f"Sentiment: {result[0]}")
 
 if __name__ == "__main__":
     main()
-    
