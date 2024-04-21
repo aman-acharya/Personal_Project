@@ -10,3 +10,4 @@ spacy
 matplotlib
 seaborn
 wordcloud
+nltk.download('stopwords')
