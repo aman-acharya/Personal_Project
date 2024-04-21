@@ -15,6 +15,8 @@ from sklearn.svm import SVC
 from sklearn.naive_bayes import MultinomialNB
 import pandas as pd
 nltk.download('stopwords')
+nltk.download('wordnet')
+# nltk.download('punkt')
 
 
 # lets crteate a class to preprocess the review
