@@ -7,3 +7,9 @@ joblib
 streamlit
 scikit-learn
 spacy
+os
+string
+matplotlib
+seaborn
+warnings
+wordcloud
