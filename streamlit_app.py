@@ -17,7 +17,7 @@ models = {'Logistic Regression': Logistic, 'Support Vector Machine': SVM, 'Rando
 st.title('Sentiment Analysis App')
 
 st.sidebar.write(title='Sentiment Analysis App')
-st.sidebar.write('This is a simple sentiment analysis app that uses four different models to predict the sentiment of a given text. The models are trained on the IMDB dataset and can predict whether a given text is positive or negative. The models are Logistic Regression, Support Vector Machine, Random Forest, and Naive Bayes.')
+st.sidebar.write('This is a simple sentiment analysis app that uses four different models to predict the sentiment of a given text. The models are trained on the review of a restaurant in US and can predict whether a given review/text is positive or negative. The models are Logistic Regression, Support Vector Machine, Random Forest, and Naive Bayes.')
 st.sidebar.write('Please enter a text in the text box below and click the "Predict" button to see the predictions of the models.')
 
 # give the user to select which model to use in the sidebar
@@ -32,7 +32,7 @@ if st.button('Predict'):
     prediction = model.predict([text])
     prediction = 'Positive' if prediction[0] == 1 else 'Negative'
     st.write(f'The predicted sentiment is: {prediction}')
-    
+
 
         
 
