@@ -68,7 +68,7 @@ class TextTokenizer(BaseEstimator, TransformerMixin):
         self.tokenizer.fit(X)
         return self
     
-    def transform(self, X, y=None):
+    def transform(self, X):
         return self.tokenizer.transform(X)
 
 Pipeline([('preprocessor', TextPreprocessor()), ('tokenizer', TextTokenizer()), ('model', LogisticRegression())])
