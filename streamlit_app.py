@@ -11,30 +11,43 @@ SVM = joblib.load('svm_pipeline.pkl')
 RF = joblib.load('rf_pipeline.pkl')
 NB = joblib.load('nb_pipeline.pkl')
 
+models = {'Logistic Regression': Logistic, 'Support Vector Machine': SVM, 'Random Forest': RF, 'Naive Bayes': NB}
+
 # Create a title for the app
 st.title('Sentiment Analysis App')
 
-# lets give user option to chose the model for prediction
-model = st.selectbox('Select the model', ('Logistic Regression', 'SVM', 'Random Forest', 'Naive Bayes'))
+st.sidebar(title='Sentiment Analysis App')
+st.sidebar.write('This is a simple sentiment analysis app that uses four different models to predict the sentiment of a given text. The models are trained on the IMDB dataset and can predict whether a given text is positive or negative. The models are Logistic Regression, Support Vector Machine, Random Forest, and Naive Bayes.')
+st.sidebar.write('Please enter a text in the text box below and click the "Predict" button to see the predictions of the models.')
 
-# Get the review from the user
-review = st.text_area('Enter your review here')
+# give the user to select which model to use in the sidebar
+model = st.sidebar.selectbox('Select a model', list(models.keys()))
 
-# Make the prediction
+# Create a text box for the user to enter the text
+text = st.text_area('Enter the text here:')
+
+# Create a button to predict the sentiment
 if st.button('Predict'):
-    if model == 'Logistic Regression':
-        prediction = Logistic.predict([review])
-    elif model == 'SVM':
-        prediction = SVM.predict([review])
-    elif model == 'Random Forest':
-        prediction = RF.predict([review])
-    else:
-        prediction = NB.predict([review])
-    
-    st.write(f'The review is: {prediction[0]}')
+    if text:
+        # Load the text preprocessor and tokenizer
+        preprocessor = TextPreprocessor()
+        tokenizer = TextTokenizer()
 
-# Add a footer
-st.markdown('Built with Streamlit by [Aman Acharya]')
+        # Preprocess the text
+        text = preprocessor.transform([text])
+
+        # Tokenize the text
+        text = tokenizer.transform(text)
+
+        # Predict the sentiment
+        prediction = models[model].predict(text)
+
+        # Display the prediction
+        st.write(f'The sentiment of the text is: {prediction[0]}')
+    else:
+        st.write('Please enter a text in the text box above to predict the sentiment.')
+
+
 
 
 
