@@ -1,7 +1,8 @@
-nb_pipeline
-logistic_pipeline
-svm_pipeline
-rf_pipeline
-new_csv
-script1
-script2
+nb_pipeline.pkl
+logistic_pipeline.pkl
+svm_pipeline.pkl
+rf_pipeline.pkl
+new_csv.ipynb
+script1.ipynb
+script2.ipynb
+a.ipynb
