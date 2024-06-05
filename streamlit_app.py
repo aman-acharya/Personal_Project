@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 import os
 import joblib
-
+from wordcloud import WordCloud
 # Load the models
 Logistic = joblib.load('logistic_pipeline.pkl')
 SVM = joblib.load('svm_pipeline.pkl')
@@ -39,12 +39,13 @@ st.sidebar.write('Word Cloud Generator')
 st.sidebar.write('This is a simple word cloud generator that generates a word cloud from the given text. The word cloud shows the most common words in the text.')
 st.sidebar.write('Please enter a text in the text box below and click the "Generate" button to see the word cloud.')
 
-# if st.sidebar.button('Generate'):
-#     text = TextPreprocessor().transform(text)
-#     text = TextTokenizer().transform(text)
-#     text = ' '.join(text)
-#     st.write('The word cloud is generated below:')
-#     st.image(f'word_cloud.png', use_column_width=True)
+if st.sidebar.button('Generate'):
+    text = TextPreprocessor().transform(text)
+    text = TextTokenizer().transform(text)
+    text = ' '.join(text)
+    st.write('The word cloud is generated below:')
+    word_cloud = WordCloud(width=800, height=400, background_color='white').generate(text)
+    st.image(word_cloud.to_array())
 
 
         
